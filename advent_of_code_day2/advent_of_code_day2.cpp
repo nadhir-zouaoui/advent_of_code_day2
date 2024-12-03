@@ -32,7 +32,7 @@ int main()
                     signe = "positif";
                 }
                 else { signe = "negatif"; }
-                tested = true;
+                tested=true;
             }
             if((signe == "positif" && (intword1 - intword2!=1 && intword1 - intword2 != 2 && intword1 - intword2 != 3)) || (signe == "negatif" && (intword1 - intword2 != -1 && intword1 - intword2 != -2 && intword1 - intword2 != -3)))
             {
