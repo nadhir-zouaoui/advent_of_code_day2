@@ -20,7 +20,7 @@ int main()
     while (getline(file, line)) {
         std::istringstream iss(line);
         std::string word2;
-        std::string signe;
+        int signeplus;
         iss >> word2;
         bool v = true;
         bool tested = false;
@@ -28,13 +28,10 @@ int main()
         while (iss >> word2 && v) {
             int intword2 = stoi(word2);
             if (tested == false) {
-                if (intword1 - intword2 >= 0) {
-                    signe = "positif";
-                }
-                else { signe = "negatif"; }
+                signeplus = intword1 - intword2 >= 0;
                 tested=true;
             }
-            if((signe == "positif" && (intword1 - intword2!=1 && intword1 - intword2 != 2 && intword1 - intword2 != 3)) || (signe == "negatif" && (intword1 - intword2 != -1 && intword1 - intword2 != -2 && intword1 - intword2 != -3)))
+            if((signeplus && (intword1 - intword2!=1 && intword1 - intword2 != 2 && intword1 - intword2 != 3)) || (!signeplus && (intword1 - intword2 != -1 && intword1 - intword2 != -2 && intword1 - intword2 != -3)))
             {
                 v = false;
             }
