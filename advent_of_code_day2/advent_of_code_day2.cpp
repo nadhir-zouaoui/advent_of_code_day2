@@ -37,14 +37,25 @@ int main()
         bool tested = false;
         int fautes = 0;
         int intword1 = stoi(word2);
+        int first = 0;
+        int word2reserve;
         while (iss >> word2) {
             int intword2 = stoi(word2);
+            if (first==1 && fautes==1 && !((signeplus && (word2reserve - intword2 != 1 && word2reserve - intword2 != 2 && word2reserve - intword2 != 3)) || (!signeplus && (word2reserve - intword2 != -1 && word2reserve - intword2 != -2 && word2reserve - intword2 != -3))))
+            {
+                intword1 = word2reserve;
+            }
             if ((signeplus && (intword1 - intword2 != 1 && intword1 - intword2 != 2 && intword1 - intword2 != 3)) || (!signeplus && (intword1 - intword2 != -1 && intword1 - intword2 != -2 && intword1 - intword2 != -3)))
             {
                 v = false;
                 fautes++;
-            }else
-            intword1 = intword2;
+                if (first==0)
+                {
+                    word2reserve = intword2;
+                }
+            }
+            else intword1 = intword2;   
+            first++;
         }
         if (v ||  fautes==1) s++;
     }
