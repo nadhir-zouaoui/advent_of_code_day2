@@ -4,7 +4,21 @@
 #include <algorithm>
 #include <string>
 #include <sstream>
-
+int monotony(std::string ch) {
+    std::istringstream iss(ch);
+    std::string word1;
+    std::string word2;
+    iss >> word1;
+    int s = 0;
+    while (iss >> word2) {
+        if (stoi(word2) > stoi(word1)) {
+            s++;
+        }
+        else s--;
+        word1 = word2;
+    }
+    return s < 0;
+}
 int main()
 {
     std::ifstream file("input.txt");
@@ -15,9 +29,9 @@ int main()
     std::string line;
     int s = 0;
     while (getline(file, line)) {
+        int signeplus=monotony(line);
         std::istringstream iss(line);
         std::string word2;
-        int signeplus;
         iss >> word2;
         bool v = true;
         bool tested = false;
@@ -25,10 +39,6 @@ int main()
         int intword1 = stoi(word2);
         while (iss >> word2) {
             int intword2 = stoi(word2);
-            if (tested == false) {
-                signeplus = intword1 - intword2 >= 0;
-                tested = true;
-            }
             if ((signeplus && (intword1 - intword2 != 1 && intword1 - intword2 != 2 && intword1 - intword2 != 3)) || (!signeplus && (intword1 - intword2 != -1 && intword1 - intword2 != -2 && intword1 - intword2 != -3)))
             {
                 v = false;
@@ -36,7 +46,7 @@ int main()
             }else
             intword1 = intword2;
         }
-        if (v || (!v && fautes==1)) s++;
+        if (v ||  fautes==1) s++;
     }
     std::cout << s << std::endl;
     std::cout << "Hello World!\n";
