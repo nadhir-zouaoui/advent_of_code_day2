@@ -1,6 +1,3 @@
-// advent_of_code_day2.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -20,31 +17,31 @@ int main()
     while (getline(file, line)) {
         std::istringstream iss(line);
         std::string word2;
-        std::string signe;
+        int signeplus;
         iss >> word2;
         bool v = true;
         bool tested = false;
+        int fautes = 0;
         int intword1 = stoi(word2);
-        while (iss >> word2 && v) {
+        while (iss >> word2) {
             int intword2 = stoi(word2);
             if (tested == false) {
-                if (intword1 - intword2 >= 0) {
-                    signe = "positif";
-                }
-                else { signe = "negatif"; }
-                tested=true;
+                signeplus = intword1 - intword2 >= 0;
+                tested = true;
             }
-            if((signe == "positif" && (intword1 - intword2!=1 && intword1 - intword2 != 2 && intword1 - intword2 != 3)) || (signe == "negatif" && (intword1 - intword2 != -1 && intword1 - intword2 != -2 && intword1 - intword2 != -3)))
+            if ((signeplus && (intword1 - intword2 != 1 && intword1 - intword2 != 2 && intword1 - intword2 != 3)) || (!signeplus && (intword1 - intword2 != -1 && intword1 - intword2 != -2 && intword1 - intword2 != -3)))
             {
                 v = false;
-            }
+                fautes++;
+            }else
             intword1 = intword2;
         }
-        if (v) s++;
+        if (v || (!v && fautes==1)) s++;
     }
-    std::cout <<s<<std::endl;
+    std::cout << s << std::endl;
     std::cout << "Hello World!\n";
 }
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
